@@ -2,12 +2,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 // Set site and base for GitHub Pages.
-// Change REPO_NAME to your actual GitHub repository name.
-// If the repo is at https://github.com/yourusername/arancha-portfolio,
-// then base should be '/arancha-portfolio'
+// base must match the GitHub repository name exactly (case-sensitive):
+// https://github.com/Arancharamirez/Portfolio-Website → '/Portfolio-Website'
 export default defineConfig({
   site: 'https://arancharamirez.github.io',
-  base: '/Porfolio-Website',
+  base: '/Portfolio-Website',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],
