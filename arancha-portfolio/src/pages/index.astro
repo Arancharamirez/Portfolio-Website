@@ -49,9 +49,6 @@ const useGravity = gravityItems.length > 0;
 
     <div class:list={['hero-text', { 'hero-text--gravity': useGravity }]}>
       <h1 class="display-xl hero-name" data-reveal-hero>ARANCHA RAMÍREZ</h1>
-      <p class="serif-italic display-m hero-sub" data-reveal-hero style="transition-delay:80ms">
-        Design Engineering · Imperial College London
-      </p>
       <p class="body-l hero-bio" data-reveal-hero style="transition-delay:160ms">
         Designing for human experience and environmental impact.<br />
         Bridging analytical depth with stakeholder communication.
@@ -182,12 +179,6 @@ const useGravity = gravityItems.length > 0;
     opacity: 0;
     transform: translateY(24px);
     animation: heroReveal 700ms var(--ease-out-expo) 100ms both;
-  }
-  .hero-sub {
-    margin: 0;
-    color: #955070;
-    opacity: 0;
-    animation: heroReveal 700ms var(--ease-out-expo) 180ms both;
   }
   .hero-bio {
     margin: 0;
@@ -407,7 +398,7 @@ const useGravity = gravityItems.length > 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-name, .hero-sub, .hero-bio, .hero-ctas {
+    .hero-name, .hero-bio, .hero-ctas {
       animation: none;
       opacity: 1;
       transform: none;
