@@ -36,6 +36,8 @@ export type Project = {
   demo_url?: { label: string; url: string };
   /** Optional external case-study site, shown as a prominent CTA under Key features. */
   showcase_url?: { label: string; url: string; note?: string };
+  /** Hidden projects are left out of every listing and get no page built. */
+  hidden?: boolean;
 };
 
 export type OtherProject = {
@@ -56,9 +58,10 @@ export type OtherProject = {
   info?: string;
   problem?: string;
   solution?: string;
+  hidden?: boolean;
 };
 
-export const projects: Project[] = [
+const allProjects: Project[] = [
 
     // ─── 01 HOUSESCOUT ─────────────────────────────────────────────────────
   {
@@ -391,6 +394,7 @@ export const projects: Project[] = [
   // ─── 06 DATA TO PRODUCT ────────────────────────────────────────────────
   {
     slug: 'data-to-product',
+    hidden: true,
     title: 'Waste Trade',
     index: '06 / 12',
     category: 'systems',
@@ -514,6 +518,7 @@ export const projects: Project[] = [
     // ─── 08 ACTIB ──────────────────────────────────────────────────────────
   {
     slug: 'actib',
+    hidden: true,
     title: 'ACTIB',
     index: '08 / 12',
     category: 'design',
@@ -576,6 +581,7 @@ export const projects: Project[] = [
   // ─── 09 HIVE-FU ────────────────────────────────────────────────────────
   {
     slug: 'hive-fu',
+    hidden: true,
     title: 'HIVE-FU',
     index: '09 / 12',
     category: 'design',
@@ -637,6 +643,7 @@ export const projects: Project[] = [
     // ─── 10 ALL-INK ────────────────────────────────────────────────────────
   {
     slug: 'all-ink',
+    hidden: true,
     title: 'ALL-INK',
     index: '10 / 12',
     category: 'design',
@@ -813,9 +820,10 @@ export const projects: Project[] = [
   },
 ];
 
-export const otherProjects: OtherProject[] = [
+const allOtherProjects: OtherProject[] = [
   {
     slug: 'drone-delivery',
+    hidden: true,
     title: 'Drone Delivery Systems',
     index: '01 / 03',
     year: '2025',
@@ -833,6 +841,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     slug: 'rain-prediction',
+    hidden: true,
     title: 'Rain Probability Prediction',
     index: '02 / 03',
     year: '2024',
@@ -850,6 +859,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     slug: 'hip-implant-fea',
+    hidden: true,
     title: 'Hip Implant FEA',
     index: '03 / 03',
     year: '2023',
@@ -866,6 +876,16 @@ export const otherProjects: OtherProject[] = [
     pdf_url: '/reports/FEA Hip Implant Report.pdf',
   },
 ];
+
+// Drop hidden projects and renumber the rest so the "01 / 08" counters stay gap-free.
+function visible<T extends { hidden?: boolean; index: string }>(list: T[]): T[] {
+  const shown = list.filter((p) => !p.hidden);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return shown.map((p, i) => ({ ...p, index: `${pad(i + 1)} / ${pad(shown.length)}` }));
+}
+
+export const projects = visible(allProjects);
+export const otherProjects = visible(allOtherProjects);
 
 export const featuredSlugs = ['actib', 'hive-fu', 'desalination', 'nest-assured'];
 
